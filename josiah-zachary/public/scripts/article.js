@@ -1,6 +1,6 @@
 'use strict';
 
-function Article (rawDataObj) {
+Article = (rawDataObj) => {
   /* REVIEW: This is a new construct to save all the properties of rawDataObj into our newly instantiated object. Object.keys is a function that returns an array of all the properties of an object as strings. forEach is an array method that iterates over and calls a function on each element of an array.
   We can also set properties on objects with bracket notation instead of dot notation, which we must do when we don't necessarily know what the property name will be and thus set it as a variable.
   Additionally, what "this" is changes depending on your context - inside a constructor function, like Article, "this" refers to the newly instantiated object. However, inside the anonymous function we're passing into forEach as an argument, "this" in 'use strict' mode will be undefined. As a result, we can pass our instantiated object "this" into forEach as a second argument to preserve context.
@@ -8,11 +8,11 @@ function Article (rawDataObj) {
   Object.keys(rawDataObj).forEach(key => {
     this[key] = rawDataObj[key];
   }, this);
-}
+};
 
 Article.all = [];
 
-Article.prototype.toHtml = function() {
+Article.prototype.toHtml = () => {
   var template = Handlebars.compile($('#article-template').text());
 
   this.daysAgo = parseInt((new Date() - new Date(this.publishedOn))/60/60/24/1000);
